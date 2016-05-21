@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-ng-app="capacityDashboardAdmin" class="no-js">
+<html lang="en" data-ng-app="myApp" class="no-js">
 
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -8,47 +8,25 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <!-- Including vendor CSS file -->
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.css" />
-    <link rel="stylesheet" type="text/css" href="/css/ngTimepicker.css" />
+
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/custom.css" />
 
 
 
     <script src="js/vendor/angular/angular.js"></script>
-
     <script src="js/vendor/angular/ui-bootstrap-tpls-1.2.5.min.js"></script>
-    <script src="js/vendor/ngTimepicker.min.js">
-    </script>
-    <script src="js/admin.js"></script>
-
-
-
-
-
 </head>
 
-<body>
-    
-     <!-- Header. -->
-    <nav class="navbar navbar-default navbar-fixed-top  ">
-        <div class="container-fluid topheader">
-            <div class="row">
-                <div class=" col-md-5 head ">
-                    <span class="brand"><font size="5" color="black">HDE Capacity Utilization Dashboard Admin</font></span>
+<body data-ng-controller="myAppController">
 
-                </div>
-            </div>
-        </div>
-        <div data-ng-show="showInfoBar" class="infobar">
-            <strong>{{infoMessage}} </strong>
-            <span class="glyphicon glyphicon-remove-circle" ng-click="removeInfoBar()"></span>
-        </div>
-    </nav>
+    <!-- Header. -->
 
+    <header data-ng-include="'html/header.html'"></header>
+    <main data-ng-include="'html/main.html'"></main>
+    <footer data-ng-include="'html/footer.html'"></footer>
 
-    <!-- HeaderContent. -->
-    
-    
-    
+    <script src="js/myAppController.js"></script>
 </body>
+
 </html>

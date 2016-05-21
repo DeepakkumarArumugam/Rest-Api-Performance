@@ -50,6 +50,16 @@ const options = {
 
 };
 
+
+server.route({
+    method: 'POST',
+    path: '/v1/benchMark',
+    config: {
+        handler: benchMark.callBenchMark
+        
+    }
+});
+
 server.register(Inert, function(err) {
     if (err) throw err;
     server.route({
