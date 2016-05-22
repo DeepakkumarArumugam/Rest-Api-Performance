@@ -25,7 +25,6 @@ server.connection({
         cors: true
     }
 
-
 });
 //Swagger options
 const options = {
