@@ -1,8 +1,5 @@
-/*jslint es6 */
-/*global module, console, LOG*/
-"use strict";
 
-const benchrest = require('bench-rest');
+var benchrest = require('bench-rest');
 
 
 
@@ -21,13 +18,13 @@ var errors = [];
 
 module.exports = {
     callBenchMark: function (req, reply) {
-        let flow = {
+        var  flow = {
             'main': []
         };
-        let runOptions = {};
-        let requestObj = req.payload.requestObj;
-        let serviceTypeAndUrl = {};
-        let main = {};
+        var  runOptions = {};
+        var  requestObj = req.payload.requestObj;
+        var  serviceTypeAndUrl = {};
+        var  main = {};
 
         main[requestObj.methodType] = requestObj.url;
         if (requestObj.payloadData != null) {
@@ -42,18 +39,18 @@ module.exports = {
         runOptions.limit = requestObj.limit;
         benchrest(flow, runOptions)
             .on('error', function (err, ctxName) {
-                LOG.info('Failed in %s with err: ', ctxName, err);
+                console.log('Failed in %s with err: ', ctxName, err);
             })
             .on('progress', function (stats, percent, concurrent, ips) {
-                LOG.info('Progress: %s complete', percent);
+                console.log('Progress: %s complete', percent);
             })
             .on('end', function (stats, errorCount) {
 
-                let response = {
+                var  response = {
                     'errorCount': errorCount,
                     'stats': stats
                 };
-                LOG.info(response);
+                console.log(response);
                 reply(response);
             });
     }

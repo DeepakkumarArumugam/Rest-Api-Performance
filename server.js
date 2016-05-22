@@ -1,43 +1,21 @@
-/*jslint es6 */
-/*global process, global, require*/
-"use strict";
-
-const Hapi = require('hapi');
-const Good = require('good');
-const Inert = require('inert');
-const HapiSwagger = require('hapi-swagger');
-const Vision = require('vision');
-const Joi = require('joi');
-const Pack = require('./package');
-const bunyan = require('bunyan');
-global.LOG = bunyan.createLogger({
-    name: "Rest-Benchmark"
+var cc     = require('config-multipaas'),
+    Hapi   = require('hapi'),
+    path   = require('path'),
+    benchMark = require('./benchmark.module');
+var config = cc()
+var server = Hapi.createServer(config.get('IP'), config.get('PORT'), {
+  cors:  true,
+  files: { relativeTo: path.resolve('.','public')}
 });
-const benchMark = require('./benchmark.module');
 
-
-
-const server = new Hapi.Server();
-server.connection({
-    port: process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000,
-    host:process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1",
-    routes: {
-        cors: true
-    }
-
+// Routes
+server.route({
+  method: 'GET',
+  path: '/status', 
+  handler: function (request, reply) { 
+    reply( {"status": "ok"} )
+  }
 });
-//Swagger options
-const options = {
-    info: {
-        'title': 'API Documentation',
-        'version': Pack.version,
-        contact: {
-            'name': 'Gunjan kumar'
-        }
-    }
-
-};
-
 
 server.route({
     method: 'POST',
@@ -48,39 +26,12 @@ server.route({
     }
 });
 
-server.register(Inert, function (err) {
-    if (err) {
-        throw err;
-    };
-    server.route({
-        method: 'GET',
-        path: '/{param*}',
-        handler: {
-            directory: {
-                path: './public',
-                redirectToSlash: true,
-                index: true
-            }
-        }
-    });
-
+server.route({
+  method: 'GET',
+  path: '/{param*}',
+  handler: { directory: { path: '.' }} // relativeTo: '/static/'
 });
 
-server.register([Inert, Vision, {
-    'register': HapiSwagger,
-    'options': options
-}], (err) => {
-    if (err) {
-        LOG.info(err);
-    }
+server.start(function () {
+  console.log('Server started at: ' + server.info.uri);
 });
-
-// Good console - Log messages
-server.register(
-
-
-    server.start(() => {
-        LOG.info('info', 'Server running at: ' + server.info.uri);
-
-    })
-);

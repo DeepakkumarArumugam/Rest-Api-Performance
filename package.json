@@ -1,35 +1,27 @@
 {
-  "name": "rest-api-performance",
-  "version": "1.0.0",
-  "description": "Rest Api Performance or benchmark",
-  "main": "server.js",
-  "scripts": {
-      "start":"node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "Restperformance",
+  "description": "A simple HAPI server based restful service performance testing tool",
+  "version": "0.0.1",
+  "private": false,
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "dependencies": {
+    "config-multipaas": "0.0.6",
+     "bench-rest": "^1.2.0",
+    "hapi": "^7.5.2"
+  },
+  "devDependencies": {
+    "tap": "^0.4.13"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gunjank/Rest-Api-Performance.git"
+    "url": "https://github.com/ryanj/hapi-base.git"
   },
-  "author": "Gunjan Kumar <sngunjan@yahoo.com> (https://github.com/gunjank)",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gunjank/Rest-Api-Performance/issues"
+  "scripts": {
+    "start": "node server.js"
   },
-  "homepage": "https://github.com/gunjank/Rest-Api-Performance#readme",
-   "engines": {
-    "node": ">= 0.6.0",
-    "npm": ">= 1.0.0"
-  },
-  "dependencies": {
-    "bench-rest": "^1.2.0",
-    "bunyan": "^1.8.1",
-    "good": "^7.0.0",
-    "good-console": "^6.1.1",
-    "hapi": "^13.4.0",
-    "hapi-swagger": "^5.1.0",
-    "inert": "^4.0.0",
-    "joi": "^8.1.0",
-    "vision": "^4.1.0"
-  }
+  "license": "CC0",
+  "main": "server.js"
 }
