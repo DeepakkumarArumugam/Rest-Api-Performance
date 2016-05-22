@@ -1,4 +1,5 @@
 /*jslint es6 */
+/*global process, global, require*/
 "use strict";
 
 const Hapi = require('hapi');
@@ -18,7 +19,8 @@ const benchMark = require('./benchmark.module');
 
 const server = new Hapi.Server();
 server.connection({
-    port: 3000,
+    port: process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000,
+    host:process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1",
     routes: {
         cors: true
     }
