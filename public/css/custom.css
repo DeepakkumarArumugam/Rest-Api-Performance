@@ -1,6 +1,6 @@
 .btn {
-    background-color: #f96305;
-    border-color: #f96302;
+    background-color: green;
+    border-color: #000;
 }
 
 .foot {
@@ -70,7 +70,7 @@ th {
 }
 
 .topheader {
-    background: #F9871F;
+    background: #C0C2D6;
 }
 
 .container {

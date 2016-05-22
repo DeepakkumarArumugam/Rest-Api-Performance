@@ -1,4 +1,6 @@
+/*jslint es6 */
 "use strict";
+
 const Hapi = require('hapi');
 const Good = require('good');
 const Inert = require('inert');
@@ -7,31 +9,16 @@ const Vision = require('vision');
 const Joi = require('joi');
 const Pack = require('./package');
 const bunyan = require('bunyan');
-global.LOG = bunyan.createLogger({name: "Rest-Benchmark"});
+global.LOG = bunyan.createLogger({
+    name: "Rest-Benchmark"
+});
 const benchMark = require('./benchmark.module');
-const baseUrl = 'https://service-hde-capacity-dashboard-dev.apps-np.homedepot.com/service/v1/capacityDashboard/';
-let flow;
-flow = {
-    main: [{
-        get: baseUrl + 'division',
-        headers: { 'uuid': '#{INDEX}' }
-    }
-
-    ]
-}
-var runOptions = {
-    limit: 10,         // concurrent connections 
-    iterations: 10,  // number of iterations to perform 
-    prealloc: 100      // only preallocate up to 100 before starting 
-};
-
-//benchMark.callBenchMark(flow, runOptions);
 
 
 
 const server = new Hapi.Server();
 server.connection({
-    port:3000,
+    port: 3000,
     routes: {
         cors: true
     }
@@ -56,12 +43,14 @@ server.route({
     path: '/v1/benchMark',
     config: {
         handler: benchMark.callBenchMark
-        
+
     }
 });
 
-server.register(Inert, function(err) {
-    if (err) throw err;
+server.register(Inert, function (err) {
+    if (err) {
+        throw err;
+    };
     server.route({
         method: 'GET',
         path: '/{param*}',
@@ -90,7 +79,7 @@ server.register(
 
 
     server.start(() => {
-        console.log('info', 'Server running at: ' + server.info.uri);
+        LOG.info('info', 'Server running at: ' + server.info.uri);
 
     })
 );
