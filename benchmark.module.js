@@ -27,7 +27,7 @@ module.exports = {
         var  main = {};
 
         main[requestObj.methodType] = requestObj.url;
-        if (requestObj.payloadData != null) {
+        if (requestObj.payloadData != null && requestObj.payloadData !="") {
             main['json'] = JSON.parse(requestObj.payloadData);
         }
         if (requestObj.headers != null) {
