@@ -6,5 +6,5 @@ command: node server.js
 instances: 1
 disk_quota: 256M
 random-route: false
-services:
+#services:
 #- splunk-drain
