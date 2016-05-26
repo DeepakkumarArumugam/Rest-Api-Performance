@@ -37,6 +37,7 @@ module.exports = {
         flow.main.push(main);
         runOptions.iterations = requestObj.iterations;
         runOptions.limit = requestObj.limit;
+        NODE_TLS_REJECT_UNAUTHORIZED=0;
         benchrest(flow, runOptions)
             .on('error', function (err, ctxName) {
                 console.log('Failed in %s with err: ', ctxName, err);
